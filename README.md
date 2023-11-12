@@ -3,6 +3,7 @@
     Library Management System by NodeJs 
      implemented using Node.js is a web-based application designed to facilitate the efficient management of library 
      resources,including books, patrons, and related information
+## ERD Attachment To Explain the Schma of Database
 
 ## Installing App
 
@@ -20,11 +21,8 @@
 
     npm run start_prod
 
-| Name             | Description      |
-| ---------------- | ---------------- |
-| **node_modules** | Contains all npm |
-
-dir  
+| Name                            | Description      |
+| **Backend/node_modules**                | Contains all npm |
 | **Backend/controllers**         | Controllers define functions to serve various express routes.|
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | **controllers/middlewareErrore**| middlewares Error which handling Error in development and proudction|
