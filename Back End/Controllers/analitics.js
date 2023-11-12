@@ -5,17 +5,26 @@ const asyncHandaler = require("../Utils/handelasync");
 const ExcelExport = require("../Utils/cvs");
 exports.analyticalDataBorrowingBooks = asyncHandaler(async (req, res, next) => {
   let { filename, workSheet, startDate, endDate, coulamAnalitics } = req.body;
-  const analyticalData = await borrowBooks.aggregate([
-    {
-      $match: {
-        [coulamAnalitics]: {
-          $gte: new Date(startDate),
-          $lte: new Date(endDate),
+  const analyticalData = await borrowBooks
+    .aggregate([
+      {
+        $match: {
+          [coulamAnalitics]: {
+            $gte: new Date(startDate),
+            $lte: new Date(endDate),
+          },
         },
       },
-    },
-  ]);
-
+      {
+        $lookup: {
+          from: "books",
+          localField: "ISBN",
+          foreignField: "ISBN",
+          as: "ISBN",
+        },
+      },
+    ])
+    .exec();
   if (analyticalData.length === 0) {
     let err = new ErrorHandling(
       "No analytical data found for the specified period!",

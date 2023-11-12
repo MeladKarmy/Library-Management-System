@@ -7,12 +7,24 @@ const features = require("../Utils/feature");
 
 //Admin
 exports.getAllBorowingBooks = asyncHandaler(async (req, res, next) => {
-  const feature = new features(Borrowing.find(), { returnDate: null })
+  const feature = new features(
+    Borrowing.find(),
+
+    { returnDate: null }
+  )
     .filter()
     .sort()
     .limitFields()
     .paginate();
-  let user = await feature.query;
+  let user = await feature.query
+    .populate({
+      path: "ISBN",
+      select: "ISBN title author shelfLocation ",
+    })
+    .populate({
+      path: "userId",
+      select: "name gender booksBorrow ",
+    });
   if (user.length == 0) {
     const err = new ErrorHandling("No Borrowing Found!", 404);
     return next(err);
@@ -37,7 +49,15 @@ exports.getAllBooksOverdue = asyncHandaler(async (req, res, next) => {
     .sort()
     .limitFields()
     .paginate();
-  let user = await feature.query;
+  let user = await feature.query
+    .populate({
+      path: "ISBN",
+      select: "ISBN title author shelfLocation ",
+    })
+    .populate({
+      path: "userId",
+      select: "name gender booksBorrow ",
+    });
   if (user.length == 0) {
     const err = new ErrorHandling("No Borrowing Found!", 404);
     return next(err);
@@ -61,7 +81,15 @@ exports.getAllBooksReturned = asyncHandaler(async (req, res, next) => {
     .limitFields()
     .paginate();
 
-  let user = await feature.query;
+  let user = await feature.query
+    .populate({
+      path: "ISBN",
+      select: "ISBN title author shelfLocation ",
+    })
+    .populate({
+      path: "userId",
+      select: "name gender booksBorrow ",
+    });
   if (user.length == 0) {
     const err = new ErrorHandling("No Returned Books Found!", 404);
     return next(err);
@@ -86,7 +114,15 @@ exports.getUserBorowingBooks = asyncHandaler(async (req, res, next) => {
     .sort()
     .limitFields()
     .paginate();
-  let user = await feature.query;
+  let user = await feature.query
+    .populate({
+      path: "ISBN",
+      select: "ISBN title author shelfLocation ",
+    })
+    .populate({
+      path: "userId",
+      select: "name gender booksBorrow ",
+    });
   if (user.length == 0) {
     const err = new ErrorHandling(
       "No Borrowing Books Found for This User!",
@@ -116,7 +152,15 @@ exports.getUserBooksOverdue = asyncHandaler(async (req, res, next) => {
     .sort()
     .limitFields()
     .paginate();
-  let user = await feature.query;
+  let user = await feature.query
+    .populate({
+      path: "ISBN",
+      select: "ISBN title author shelfLocation ",
+    })
+    .populate({
+      path: "userId",
+      select: "name gender booksBorrow ",
+    });
   if (user.length == 0) {
     const err = new ErrorHandling("No Borrowing Found!", 404);
     return next(err);
@@ -137,7 +181,15 @@ exports.getUserBooksReturned = asyncHandaler(async (req, res, next) => {
     returnDate: { $ne: null },
   }).filter();
 
-  let user = await feature.query;
+  let user = await feature.query
+    .populate({
+      path: "ISBN",
+      select: "ISBN title author shelfLocation ",
+    })
+    .populate({
+      path: "userId",
+      select: "name gender booksBorrow ",
+    });
   if (user.length == 0) {
     const err = new ErrorHandling(
       "No Returned Books Found For This User ",
@@ -155,9 +207,16 @@ exports.getUserBooksReturned = asyncHandaler(async (req, res, next) => {
   });
 });
 exports.getAllUserBooks = asyncHandaler(async (req, res, next) => {
-  let userBooks = await Borrowing.find({ userId: req.params.id }).sort(
-    "-checkoutDate"
-  );
+  let userBooks = await Borrowing.find({ userId: req.params.id })
+    .populate({
+      path: "ISBN",
+      select: "ISBN title author shelfLocation ",
+    })
+    .populate({
+      path: "userId",
+      select: "name gender booksBorrow ",
+    })
+    .sort("-checkoutDate");
   if (userBooks.length == 0) {
     const err = new ErrorHandling("No Borrowing Found!", 404);
     return next(err);
@@ -173,7 +232,16 @@ exports.getAllUserBooks = asyncHandaler(async (req, res, next) => {
 });
 
 exports.getBorrowBook = asyncHandaler(async (req, res, next) => {
-  const user = await users.findById(req.params.id);
+  const user = await users
+    .findById(req.params.id)
+    .populate({
+      path: "ISBN",
+      select: "ISBN title author shelfLocation ",
+    })
+    .populate({
+      path: "userId",
+      select: "name gender booksBorrow ",
+    });
 
   if (!user) {
     const err = new ErrorHandling("user with that ID is not found!", 404);

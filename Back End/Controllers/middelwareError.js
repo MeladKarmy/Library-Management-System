@@ -19,11 +19,6 @@ const duplicateKeyErrorHandler = (err) => {
 
   return new ErrorHandling(msg, 400);
 };
-const jwtExpiredErrorHandler = (err) => {
-  const msg = `Login EXPIRED , Please Try login again`;
-
-  return new ErrorHandling(msg, 400);
-};
 
 const validationErrorHandler = (err) => {
   const errors = Object.values(err.errors).map((val) => val.message);
@@ -57,8 +52,6 @@ module.exports = (error, req, res, next) => {
     if (error.name === "CastError") error = castErrorHandler(error);
     if (error.code === 11000) error = duplicateKeyErrorHandler(error);
     if (error.name === "ValidationError") error = validationErrorHandler(error);
-    if (error.name === "TokenExpiredError")
-      error = jwtExpiredErrorHandler(error);
 
     prodErrors(res, error);
   }
