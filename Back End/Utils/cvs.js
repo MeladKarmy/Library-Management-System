@@ -1,8 +1,10 @@
 const ExcelJS = require("exceljs");
+
 class ExcelExport {
-  constructor() {
+  constructor(filename, workSheet) {
     this.workbook = new ExcelJS.Workbook();
-    this.worksheet = this.workbook.addWorksheet("Sheet 1");
+    this.worksheet = this.workbook.addWorksheet(workSheet);
+    this.filename = filename + ".xlsx";
   }
   addHeaders(headers) {
     this.worksheet.columns = headers.map((header) => ({
@@ -17,8 +19,8 @@ class ExcelExport {
     });
   }
 
-  async saveToFile(filename) {
-    await this.workbook.xlsx.writeFile(filename);
+  async saveToFile() {
+    await this.workbook.xlsx.writeFile(this.filename);
   }
 }
 

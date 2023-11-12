@@ -1,26 +1,29 @@
 const express = require("express");
 const router = express.Router();
 const borrowBooks = require("../Controllers/borrowBook");
+const Auth = require("../Controllers/Auth");
 const RateLimiter = require("../Utils/limitRequest");
 const limiter = new RateLimiter();
+
+router.use(Auth.checkUserLogin);
 
 router
   .route("/borrowBook")
   //ADMIN
-  .post(limiter.getMiddleware(), borrowBooks.borrowBook)
-  .get(borrowBooks.getAllBorowingBooks);
+  .post(limiter.getMiddleware(), Auth.checkRoleAdmin, borrowBooks.borrowBook)
+  .get(Auth.checkRoleAdmin, borrowBooks.getAllBorowingBooks);
 
 //USER
 router
   .route("/borrowBook/:id")
   .get(borrowBooks.getUserBorowingBooks)
   //ADMIN
-  .delete(borrowBooks.deleteBorrowBooks);
+  .delete(Auth.checkRoleAdmin, borrowBooks.deleteBorrowBooks);
 //ADMIN
 router
   .route("/overdueBooks")
 
-  .get(borrowBooks.getAllBooksOverdue);
+  .get(Auth.checkRoleAdmin, borrowBooks.getAllBooksOverdue);
 //USER
 router
   .route("/overdueBook/:id")
@@ -30,21 +33,22 @@ router
 router
   .route("/returnBook")
   //ADMIN
-  .post(limiter.getMiddleware(), borrowBooks.returnBook)
+  .post(limiter.getMiddleware(), Auth.checkRoleAdmin, borrowBooks.returnBook)
   //ADMIN
-  .get(borrowBooks.getAllBooksReturned);
+  .get(Auth.checkRoleAdmin, borrowBooks.getAllBooksReturned);
 //USER
 router
   .route("/returnBook/:id")
 
   .get(borrowBooks.getUserBooksReturned);
+//ADMIN
 router
   .route("/overdueBooks/lastMonth")
 
-  .get(borrowBooks.getAllOverdueBooksBooksLastMonth);
+  .get(Auth.checkRoleAdmin, borrowBooks.getAllOverdueBooksBooksLastMonth);
 router
   .route("/borrowingBooks/lastMonth")
 
-  .get(borrowBooks.getAllBorowingBooksLastMonth);
+  .get(Auth.checkRoleAdmin, borrowBooks.getAllBorowingBooksLastMonth);
 
 module.exports = router;
