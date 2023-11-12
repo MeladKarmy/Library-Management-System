@@ -25,27 +25,20 @@
 dir  
 | **Backend/controllers**         | Controllers define functions to serve various express routes.                                                                             |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-
 | **controllers/middlewareErrore**| middlewares Error which handling Error in development and proudction                                                                      |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-
 | **Backend/routes**              | Contain all express routes, separated by module/area of application                                                                       |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-
 | **Backend/Models**              | Models define schemas that will be used in storing and retrieving data from Application database                                          |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-
 | **Backend/Utils**               |classes to use in any where in App such handling throw Error,create file.xlsx,feature to use when get data in controller,
-                                                                    handle function to use Async,limitition on request                                                        |
+|                                 |                                 handle function to use Async,limitition on request                                                        |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | **Backend/app.js**              | Entry point to express app                                                                                                                |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-
 | **Backend/server.js**           | contain all server dependencies                                                                                                           |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-
 | **Backend/package.json**        | Contains npm dependencies as well as [build scripts]                                                                                      |
-
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | **config.env**                  | Application configuration including environment-specific configs|
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -60,7 +53,7 @@ dir
 
     use Session and Cookies HttpOnly and JWT TO Encryption Data
 
-Rigister path===>/Auth/signin
+    Rigister path===>/Auth/signin
 
        Method post(AuthUser.signUp)
     # Data you will send {
