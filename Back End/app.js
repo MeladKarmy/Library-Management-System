@@ -5,6 +5,7 @@ const globalErrorHandler = require("./Controllers/middelwareError");
 const ErrorHandling = require("./Utils/errorHandling");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const AuthRouter = require("./Routes/Auth");
 const usersRouter = require("./Routes/users");
 const booksRouter = require("./Routes/books");
@@ -14,15 +15,20 @@ const app = express();
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-if (process.env.NODE_ENV == "production") {
-}
+
 app.use(
   session({
     key: "user",
     name: "jwt",
     secret: process.env.SECRET_SESSION,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.BD_URI,
+      autoRemove: "interval",
+      autoRemoveInterval: 10, // In minutes. Default
+      ttl: 1 * 60 * 60, // = 1 hour.
+    }),
     cookie: {
       sameSite: true,
       secure: process.env.NODE_ENV === "production",

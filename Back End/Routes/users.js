@@ -3,8 +3,6 @@ const router = express.Router();
 const users = require("../Controllers/user");
 const Auth = require("../Controllers/Auth");
 
-const Auth = require("../Controllers/Auth");
-
 router.use(Auth.checkUserLogin);
 
 router

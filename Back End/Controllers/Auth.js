@@ -3,6 +3,7 @@ const asyncHandaler = require("../Utils/handelasync");
 const users = require("../Models/users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const session = require("express-session");
 
 exports.signUp = asyncHandaler(async (req, res, next) => {
   let user = await users.findOne({ email: req.body.email });
