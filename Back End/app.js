@@ -16,27 +16,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 if (process.env.NODE_ENV == "production") {
 }
-// app.use(
-//   session({
-//     key: "user",
-//     name: "jwt",
-//     secret: process.env.SECRET_SESSION,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       sameSite: true,
-//       secure: process.env.NODE_ENV === "production",
-//     },
-//   })
-// );
+app.use(
+  session({
+    key: "user",
+    name: "jwt",
+    secret: process.env.SECRET_SESSION,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      sameSite: true,
+      secure: process.env.NODE_ENV === "production",
+    },
+  })
+);
 
-// app.use(cookieParser());
+app.use(cookieParser());
 
 app.use(
   cors({
-    origin: true, // "true" will copy the domain of the request back
-    credentials: true, // This MUST be "true" if your endpoint is
-    methods: "POST,GET,PUT,DELETE", // Make sure you're not blocking
+    origin: true,
+    credentials: true,
+    methods: "POST,GET,PUT,DELETE",
   })
 );
 

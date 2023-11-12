@@ -3,11 +3,18 @@ const router = express.Router();
 const users = require("../Controllers/user");
 const Auth = require("../Controllers/Auth");
 
-router.route("/").get(users.getAllUsers).post(users.createUser);
+const Auth = require("../Controllers/Auth");
+
+router.use(Auth.checkUserLogin);
+
+router
+  .route("/")
+  .get(Auth.checkRoleAdmin, users.getAllUsers)
+  .post(Auth.checkRoleAdmin, users.createUser);
 router
   .route("/:id")
   .get(users.getUser)
-  .post(users.updateUsers)
-  .delete(users.deleteUsers);
+  .post(Auth.checkRoleAdmin, users.updateUsers)
+  .delete(Auth.checkRoleAdmin, users.deleteUsers);
 
 module.exports = router;
