@@ -3,30 +3,38 @@ const ErrorHandling = require("../Utils/errorHandling");
 const asyncHandaler = require("../Utils/handelasync");
 
 const ExcelExport = require("../Utils/cvs");
-exports.ANALITICS = asyncHandaler(async (req, res, next) => {
-  const { startDate, endDate } = req.query;
-
+exports.analyticalDataBorrowingBooks = asyncHandaler(async (req, res, next) => {
+  let { filename, workSheet, startDate, endDate, coulamAnalitics } = req.body;
   const analyticalData = await borrowBooks.aggregate([
     {
       $match: {
-        checkoutDate: { $gte: new Date(startDate), $lte: new Date(endDate) },
+        [coulamAnalitics]: {
+          $gte: new Date(startDate),
+          $lte: new Date(endDate),
+        },
       },
     },
-    // Add more stages for specific analytics based on your requirements
   ]);
 
   if (analyticalData.length === 0) {
-    throw new Error("No analytical data found for the specified period!");
+    let err = new ErrorHandling(
+      "No analytical data found for the specified period!",
+      404
+    );
+    return next(err);
   }
 
-  const excelExport = new ExcelExport();
+  const excelExport = new ExcelExport(filename, workSheet);
   const headers = Object.keys(analyticalData[0]);
   excelExport.addHeaders(headers);
   excelExport.addData(analyticalData);
+  await excelExport.saveToFile();
 
-  const filename = "analytical_report.xlsx";
-  await excelExport.saveToFile(filename);
-
-  // Send the file as a response
-  res.attachment(filename).sendFile(filename);
+  res.attachment(filename).json({
+    status: "success",
+    data: {
+      filename,
+      workSheet,
+    },
+  });
 });

@@ -7,6 +7,6 @@ const limiter = new RateLimiter();
 router
   .route("/")
   //ADMIN
-  .get(analitics.ANALITICS);
+  .get(analitics.analyticalDataBorrowingBooks);
 
 module.exports = router;
