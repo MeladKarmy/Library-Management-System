@@ -1,7 +1,8 @@
 # Library-Management-System
 
     Library Management System by NodeJs 
-     implemented using Node.js is a web-based application designed to facilitate the efficient management of library resources,including books, patrons, and related information
+     implemented using Node.js is a web-based application designed to facilitate the efficient management of library 
+     resources,including books, patrons, and related information
 
 ## Installing App
 
