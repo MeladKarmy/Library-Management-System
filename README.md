@@ -36,12 +36,12 @@ dir
 | **config.env**                  | Application configuration including environment-specific configs|
 
 
-## End POINT (RESTFUL API)
+# End POINT (RESTFUL API)
 
     base path ===> Domain/api/v1/
     all rout with Method get support search in params
 
-# Authentication & Authurith
+## Authentication & Authurith
 
     use Session and Cookies HttpOnly and JWT TO Encryption Data
 
@@ -66,7 +66,7 @@ dir
     Method post(AuthUser.signOut);
     # Data you will send {}
 
-# Books Crud Operation
+## Books Crud Operation
 
     get all books ===> books
     post creat book ==> books
@@ -81,7 +81,7 @@ dir
     post updat spacific book ===>books/:id
     Delete updat spacific book ===>books/:id
 
-# user Crud Operation
+## user Crud Operation
 
     get all users ===> users
     post creat book ==> users
@@ -97,7 +97,7 @@ dir
     post updat spacific book ===>users/:id
     Delete updat spacific book ===>users/:id
 
-# Borrowin Book Crud Operation
+## Borrowin Book Crud Operation
 
     # Method get
     path checkOutBooks/borrowBook ==>get borrowing book
@@ -125,7 +125,7 @@ dir
     # Method Delete
     path checkOutBooks/borrowBook/:id ===> to delete borrowing book
 
-# Analitics Crud Operation
+## Analitics Crud Operation
 
     Method get path ===> analyticals
     #Data ue will send
