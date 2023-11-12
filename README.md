@@ -21,10 +21,9 @@
 
     npm run start_prod
 
-| Name                            | Description      |
-| **Backend/node_modules**                | Contains all npm |
+|  Name                           | Description                              |
+| **Backend/node_modules**        | Contains all npm                      |
 | **Backend/controllers**         | Controllers define functions to serve various express routes.|
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | **controllers/middlewareErrore**| middlewares Error which handling Error in development and proudction|
 | **Backend/routes**              | Contain all express routes, separated by module/area of application|
 | **Backend/Models**              | Models define schemas that will be used in storing and retrieving data from Application database|
