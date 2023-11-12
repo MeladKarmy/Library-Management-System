@@ -23,25 +23,17 @@
 | **node_modules** | Contains all npm |
 
 dir  
-| **Backend/controllers**         | Controllers define functions to serve various express routes.                                                                             |
+| **Backend/controllers**         | Controllers define functions to serve various express routes.|
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **controllers/middlewareErrore**| middlewares Error which handling Error in development and proudction                                                                      |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **Backend/routes**              | Contain all express routes, separated by module/area of application                                                                       |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **Backend/Models**              | Models define schemas that will be used in storing and retrieving data from Application database                                          |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **controllers/middlewareErrore**| middlewares Error which handling Error in development and proudction|
+| **Backend/routes**              | Contain all express routes, separated by module/area of application|
+| **Backend/Models**              | Models define schemas that will be used in storing and retrieving data from Application database|
 | **Backend/Utils**               |classes to use in any where in App such handling throw Error,create file.xlsx,feature to use when get data in controller,
-|                                 |                                 handle function to use Async,limitition on request                                                        |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **Backend/app.js**              | Entry point to express app                                                                                                                |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **Backend/server.js**           | contain all server dependencies                                                                                                           |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **Backend/package.json**        | Contains npm dependencies as well as [build scripts]                                                                                      |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+|                                 |                                 handle function to use Async,limitition on request  |
+| **Backend/app.js**              | Entry point to express app |
+| **Backend/server.js**           | contain all server dependencies|
+| **Backend/package.json**        | Contains npm dependencies as well as [build scripts] |
 | **config.env**                  | Application configuration including environment-specific configs|
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 
 
 ## End POINT (RESTFUL API)
