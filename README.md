@@ -40,6 +40,10 @@
 
     base path ===> Domain/api/v1/
     all rout with Method get support search in params
+    when user borrow book count of books which he have Increases by 1
+    and count the book avalibale Decrease by 1
+    when user return book count of books Decrease by 1
+    and count book avalibale Increases by 1
 
 ## Authentication & Authurith
 
